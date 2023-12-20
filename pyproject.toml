@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "python-template"
+version = "0.1.0"
+description = "Poetry package for easy Python repo creation"
+authors = ["Clément Sicard <clement@sicard.ch>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+loguru = "^0.7.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.0"
+ruff = "^0.1.4"
+isort = "^5.12.0"
+interrogate = "^1.5.0"
+
+# 1.7.1 is NOT compatible with ARM-based Macs
+mypy = "1.7.0"
+
+pre-commit = "^3.4.0"
+pytest = "^7.4.3"
+poetry-plugin-export = "^1.6.0"
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+ignore-module = true
+fail-under = 100
+verbose = 2
+
+[tool.ruff]
+line-length = 120
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
