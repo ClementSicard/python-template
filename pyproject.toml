@@ -5,6 +5,7 @@ description = "Poetry package for easy Python repo creation"
 authors = ["Clément Sicard <clement@sicard.ch>"]
 license = "MIT"
 readme = "README.md"
+packages = [{ include = "src", from = "." }]
 
 [tool.poetry.dependencies]
 python = "~3.10"
