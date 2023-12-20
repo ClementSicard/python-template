@@ -11,7 +11,5 @@ updates:
       interval: "weekly"
     reviewers:
       - "ClementSicard"
-      - "andreakiro"
-      - "giordano-lucas"
     ignore:
       - dependency-name: "mypy"
