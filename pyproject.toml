@@ -31,11 +31,28 @@ ignore-module = true
 fail-under = 100
 verbose = 2
 
+
 [tool.ruff]
 line-length = 120
+show-source = true
+
+[tool.isort]
+profile = "black"
 
 [tool.black]
 line-length = 120
+color = true
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+warn_unused_ignores = false
+files = "**/*.py"
+
+[tool.pytest.ini_options]
+testpaths = ["./tests/"]
+# tests should fail if there is any warning => except the following nones:
+filterwarnings = ["error"]
 
 [build-system]
 requires = ["poetry-core"]
