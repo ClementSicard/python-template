@@ -7,4 +7,4 @@ Template for Python-based repositories
 
 ## CI status
 
-[![Python CI](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml) [![Test CI](https://github.com/ClementSicard/python-template/actions/workflows/test-ci.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/test-ci.yaml)
+[![Python CI](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml)
