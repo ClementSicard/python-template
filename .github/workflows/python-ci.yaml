@@ -1,9 +1,12 @@
-name: Python CI
+name: Python CICD
 
 on:
+  workflow_dispatch:
+
   pull_request:
     branches:
       - main
+
   push:
     branches:
       - main
@@ -14,64 +17,108 @@ concurrency:
 
 env:
   WORKDIR: "."
+  LINE_LENGTH: 120
 
 jobs:
-  build:
-    name: Python ${{ matrix.python-version }} - Line length ${{ matrix.line-length }}
+  quality-checks:
+    name: Quality checks (${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     strategy:
       fail-fast: true
       matrix:
-        python-version: ["3.10", "3.11"]
-        line-length: [120]
+        python-version: ["3.11"]
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Get Poetry cache
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: ${{ runner.os }}-poetry-${{ github.repository_id }}-${{ matrix.python-version }}
+
       - name: Install Poetry
-        run: |
-          pipx install poetry
+        run: pipx install poetry
 
       - name: Configure Poetry
         run: |
           poetry config virtualenvs.in-project true
           poetry config virtualenvs.path .venv
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        id: setup-python
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: "poetry"
-          cache-dependency-path: poetry.lock
-
-      - name: Choose cache Poetry environment
-        run: |
-          poetry env use "${{ steps.setup-python.outputs.python-path }}"
-
       - name: Install dependencies with Poetry
-        run: |
-          poetry install
+        run: poetry install
 
-      - name: Check code with `isort`
+      - name: Sort imports with isort
         run: |
           poetry run isort **/*.py --profile black --check-only
 
-      - name: Lint with Ruff
+      - name: Lint code with Ruff
         run: |
-          poetry run ruff **/*.py --line-length ${{ matrix.line-length }} --show-source -v
+          poetry run ruff **/*.py --line-length $LINE_LENGTH --show-source -v
 
-      - name: Check formatting with `black`
+      - name: Format code with Black
         run: |
-          poetry run black **/*.py --line-length ${{ matrix.line-length }} --check -v
+          poetry run black **/*.py --line-length $LINE_LENGTH --check -v
 
-      - name: Check docstrings with `interrogate`
+      - name: Docstrings with interrogate
         run: |
-          poetry run interrogate **/*.py -vv
+          poetry run interrogate
 
-      - name: Check static types with `mypy`
+      - name: Static types with mypy
         run: |
-          poetry run pip install types-requests types-PyYAML
+          poetry run mypy
 
-          poetry run mypy **/*.py --strict --ignore-missing-imports --no-warn-unused-ignores
+  unit-tests:
+    name: Unit tests ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    needs: quality-checks
+    if: success()
+
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Get Poetry cache
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: ${{ runner.os }}-poetry-${{ github.repository_id }}-${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Configure Poetry
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry config virtualenvs.path .venv
+
+      - name: Run pytest
+        run: |
+          poetry run pytest -p no:warnings --tb=no -vv --junit-xml report.xml
+
+      - name: Upload pytest results as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-results-${{ matrix.python-version }}
+          path: report.xml
