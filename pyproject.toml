@@ -15,7 +15,7 @@ loguru = "^0.7.2"
 black = "^24.4.1"
 ruff = "^0.4.1"
 isort = "^5.12.0"
-interrogate = "^1.5.0"
+interrogate = "^1.7.0"
 
 # 1.7.1 is NOT compatible with ARM-based Macs
 mypy = "1.7.0"
