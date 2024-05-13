@@ -22,7 +22,7 @@ mypy = "1.7.0"
 
 pre-commit = "^3.6.2"
 pytest = "^8.2.0"
-poetry-plugin-export = "^1.6.0"
+poetry-plugin-export = "^1.8.0"
 
 [tool.interrogate]
 ignore-init-method = true
