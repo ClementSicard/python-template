@@ -20,7 +20,7 @@ interrogate = "^1.7.0"
 # 1.7.1 is NOT compatible with ARM-based Macs
 mypy = "1.7.0"
 
-pre-commit = "^3.6.2"
+pre-commit = "^3.7.1"
 pytest = "^8.2.0"
 poetry-plugin-export = "^1.6.0"
 
