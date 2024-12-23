@@ -1,6 +1,5 @@
 # New Python repository
 
-![coverage](assets/coverage.svg)
 
 Template for Python-based repositories
 
@@ -9,4 +8,5 @@ Template for Python-based repositories
 
 ## CI status
 
-[![Python CI](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/python-ci.yaml)
+![coverage](assets/coverage.svg)
+[![Lint](https://github.com/ClementSicard/python-template/actions/workflows/lint.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/lint.yaml) [![Test](https://github.com/ClementSicard/python-template/actions/workflows/test.yaml/badge.svg)](https://github.com/ClementSicard/python-template/actions/workflows/test.yaml) 
