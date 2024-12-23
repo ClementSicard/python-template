@@ -13,6 +13,10 @@ clean:
 	find . | grep -E ".pytype" | xargs rm -rf
 	# pytest
 	find . | grep -E ".pytest_cache" | xargs rm -rf
+	# ruff
+	find . | grep -E ".ruff_cache" | xargs rm -rf
+	# mypy
+	find . | grep -E ".mypy_cache" | xargs rm -rf
 	# Build
 	rm -rf build/
 
