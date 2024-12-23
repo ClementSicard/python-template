@@ -1,4 +1,4 @@
-name: Python CICD
+name: Test
 
 on:
   workflow_dispatch:
