@@ -1,0 +1,60 @@
+name: Python CICD
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.11"
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install the project
+        run: uv sync --all-extras --dev
+
+      - name: Run pytest
+        run: make test
+
+      - name: Report test results
+        uses: pmeier/pytest-results-action@main
+        with:
+          path: test-results/*.xml
+
+      - name: Upload pytest results as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-results
+          path: test-results/*
+          retention-days: 30
+
+      - name: Upload pytest results as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-results
+          path: report.xml

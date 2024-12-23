@@ -30,6 +30,9 @@ dev-dependencies = [
   "mkdocs-gen-files",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
 [tool.ruff]
 line-length = 80
 
@@ -114,12 +117,12 @@ indent = 4
 color_output = true
 
 [tool.coverage.run]
-source = ["src"]    # Add source folder to coverage
+source = ["src/project_name"] # Add source folder to coverage
 branch = true
 omit = ["*test.py"]
 
 [coverage.paths]
-source = "src"
+source = "src/project_name"
 
 [coverage.run]
 branch = true
