@@ -1,5 +1,7 @@
 # New Python repository
 
+![coverage](assets/coverage.svg)
+
 Template for Python-based repositories
 
 

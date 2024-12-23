@@ -122,7 +122,7 @@ branch = true
 omit = ["*test.py"]
 
 [coverage.paths]
-source = "src/project_name"
+source = "project-name"
 
 [coverage.run]
 branch = true

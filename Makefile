@@ -1,6 +1,9 @@
 UV_RUN ?= uv run --frozen
 PYTEST ?= $(UV_RUN) pytest
 
+TEST_RESULTS_FOLDER := test-results
+NAME := 
+
 #* Cleaning
 
 .PHONY: clean
@@ -90,4 +93,5 @@ install:
 
 .PHONY: test
 test:
-	$(PYTEST) 
+	$(PYTEST) --cov -n auto --dist loadgroup --junit-xml=$(TEST_RESULTS_FOLDER)/tests.xml --html=$(TEST_RESULTS_FOLDER)/tests.html --self-contained-html
+	$(UV_RUN) coverage-badge -o assets/coverage.svg -f
