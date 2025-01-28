@@ -4,7 +4,7 @@
 Template for Python-based repositories
 
 
-![Packages](https://img.shields.io/badge/package%20manager-poetry-blue) ![Style](https://img.shields.io/badge/style-black-black) ![Linter](https://img.shields.io/badge/linter-ruff-black) ![Type check](https://img.shields.io/badge/type%20checker-mypy-black)
+![Packages](https://img.shields.io/badge/package%20manager-uv-blue) ![Style](https://img.shields.io/badge/style-black-black) ![Linter](https://img.shields.io/badge/linter-ruff-black) ![Type check](https://img.shields.io/badge/type%20checker-mypy-black)
 
 ## CI status
 
