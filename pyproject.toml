@@ -1,11 +1,11 @@
 [project]
-name = "python_project"
-description = "uv package for easy Python repo creation"
-keywords = []
-requires-python = ">=3.11,<3.12"
-readme = "README.md"
 dependencies = ["loguru"]
+description = "uv package for easy Python repo creation"
 dynamic = ["version"]
+keywords = []
+name = "project-name"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
 
 [tool.uv]
 dev-dependencies = [
@@ -35,43 +35,43 @@ dev-dependencies = [
 packages = ["src/project_name"]
 
 [tool.hatch.version]
-path = "src/project_name/__init__.py"
 default-version = "0.0.0+unknown"
+path = "src/project_name/__init__.py"
 
 [build-system]
-requires = ["hatchling", "versioningit"]
 build-backend = "hatchling.build"
+requires = ["hatchling", "versioningit"]
 
 [tool.ruff]
 line-length = 80
 
 [tool.ruff.lint]
 select = [
-  "E",     # pycodestyle
-  "F",     # flake8
-  "UP",    # pyupgrade
-  "S",     # bandit
-  "D",     # pydocstyle
-  "W",     # Warning
-  "B",     # Bugbear
-  "INP",   # __init__.py
-  "COM",   # Commas
-  "SLF",   # private access
-  "TID",   # tidy imports
-  "TD",    # todos
-  "PD",    # pandas
-  "PL",    #pylint
-  "NPY",   # numpy
-  "RUF",   # ruff
+  "E", # pycodestyle
+  "F", # flake8
+  "UP", # pyupgrade
+  "S", # bandit
+  "D", # pydocstyle
+  "W", # Warning
+  "B", # Bugbear
+  "INP", # __init__.py
+  "COM", # Commas
+  "SLF", # private access
+  "TID", # tidy imports
+  "TD", # todos
+  "PD", # pandas
+  "PL", #pylint
+  "NPY", # numpy
+  "RUF", # ruff
   "ASYNC", # async
 ]
 
 ignore = [
-  "E501",    # Never enforce `E501` (line length)
-  "COM812",  # Allow missing trailing commas
+  "E501", # Never enforce `E501` (line length)
+  "COM812", # Allow missing trailing commas
   "PLR0913", # Allow many arguments in functions
-  "TD003",   # Allow TODOs without issue link
-  "S101",    # Allow use of asserts when they make more sense than raising errors
+  "TD003", # Allow TODOs without issue link
+  "S101", # Allow use of asserts when they make more sense than raising errors
 ]
 
 unfixable = ["B"]
@@ -83,10 +83,6 @@ convention = "google"
 "*_test.py" = ["S101"]
 
 [tool.pyink]
-pyink-indentation = 4
-pyink-use-majority-quotes = true
-target-version = ["py311"]
-line-length = 80
 color = true
 exclude = '''
 /(
@@ -103,14 +99,21 @@ exclude = '''
   | venv
 )/
 '''
-
+line-length = 80
+pyink-indentation = 4
+pyink-use-majority-quotes = true
+target-version = ["py311"]
 
 [tool.isort]
-py_version = "311"
+color_output = true
+include_trailing_comma = true
+indent = 4
+known_typing = ["typing", "typing_extensions", "types"]
 line_length = 1_000
 lines_after_imports = 2
-single_line_exclusions = ["collections.abc", "typing", "typing_extensions"]
-known_typing = ["typing", "typing_extensions", "types"]
+multi_line_output = 3
+profile = "google"
+py_version = "311"
 sections = [
   "FUTURE",
   "STDLIB",
@@ -119,16 +122,12 @@ sections = [
   "LOCALFOLDER",
   "TYPING",
 ]
-include_trailing_comma = true
-profile = "google"
-multi_line_output = 3
-indent = 4
-color_output = true
+single_line_exclusions = ["collections.abc", "typing", "typing_extensions"]
 
 [tool.coverage.run]
-source = ["src/project_name"] # Add source folder to coverage
 branch = true
 omit = ["*test.py"]
+source = ["src/project_name"] # Add source folder to coverage
 
 [coverage.paths]
 source = "src"
