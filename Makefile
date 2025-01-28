@@ -2,7 +2,6 @@ UV_RUN ?= uv run --frozen
 PYTEST ?= $(UV_RUN) pytest
 
 TEST_RESULTS_FOLDER := test-results
-NAME := 
 
 #* Cleaning
 
@@ -77,7 +76,7 @@ uv-setup:
 	pip install uv
 
 .PHONY: lock
-lock: uv-setup
+lock:
 	uv lock
 
 .PHONY: lock-upgrade
@@ -86,7 +85,7 @@ lock-upgrade: uv-setup
 
 .PHONY: install
 install:
-	uv sync --frozen
+	uv sync --frozen --all-extras --dev
 
 
 #* Testing

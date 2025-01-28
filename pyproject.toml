@@ -1,5 +1,5 @@
 [project]
-name = "python-template"
+name = "python_project"
 description = "uv package for easy Python repo creation"
 keywords = []
 requires-python = ">=3.11,<3.12"
@@ -19,6 +19,7 @@ dev-dependencies = [
   "ruff",
   "pytype",
   "blocklint",
+  "hatch",
   "tqdm",
   "ipykernel",
   "absl-py",
@@ -31,7 +32,15 @@ dev-dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["src/project_name"]
+
+[tool.hatch.version]
+path = "src/project_name/__init__.py"
+default-version = "0.0.0+unknown"
+
+[build-system]
+requires = ["hatchling", "versioningit"]
+build-backend = "hatchling.build"
 
 [tool.ruff]
 line-length = 80
@@ -74,7 +83,7 @@ convention = "google"
 "*_test.py" = ["S101"]
 
 [tool.pyink]
-pyink-indentation = 2
+pyink-indentation = 4
 pyink-use-majority-quotes = true
 target-version = ["py311"]
 line-length = 80
@@ -122,7 +131,7 @@ branch = true
 omit = ["*test.py"]
 
 [coverage.paths]
-source = "project-name"
+source = "src"
 
 [coverage.run]
 branch = true
