@@ -22,9 +22,7 @@
     ],
     "ruff.importStrategy": "fromEnvironment",
     "ruff.enable": true,
-    "ruff.lint.args": [
-        "--config=./pyproject.toml"
-    ],
+    "ruff.configuration": "./pyproject.toml",
     "ruff.organizeImports": false,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
