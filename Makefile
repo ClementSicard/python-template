@@ -1,5 +1,8 @@
-UV_RUN ?= uv run --frozen
+UV := $(shell command -v uv || echo ~/.local/bin/uv)
+UV_RUN ?= $(UV) run --no-sync
 PYTEST ?= $(UV_RUN) pytest
+
+LOAD_ENV ?= export $$(cat .env | xargs)
 
 TEST_RESULTS_FOLDER := test-results
 
