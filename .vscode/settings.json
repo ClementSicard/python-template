@@ -1,6 +1,6 @@
 {
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit",
@@ -11,19 +11,11 @@
         "--settings-path",
         "pyproject.toml"
     ],
-    "black-formatter.importStrategy": "fromEnvironment",
-    "black-formatter.path": [
-        "uv",
-        "run",
-        "pyink"
-    ],
-    "black-formatter.args": [
-        "--config=./pyproject.toml"
-    ],
     "ruff.importStrategy": "fromEnvironment",
     "ruff.enable": true,
     "ruff.configuration": "./pyproject.toml",
     "ruff.organizeImports": false,
+    "ruff.configurationPreference": "filesystemFirst",
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
     "files.insertFinalNewline": true,
